@@ -29,7 +29,35 @@ namespace Individueel_P_S2
                 }
             }
 
-            map[4, 4] = Blocktype.SpawnHero;
+            map[4, 3] = Blocktype.SpawnHero;
+
+            map[1, 3] = Blocktype.WallFloor;
+            map[1, 4] = Blocktype.WallFloor;
+            map[2, 3] = Blocktype.WallFloor;
+            map[2, 4] = Blocktype.WallFloor;
+
+            map[4, 6] = Blocktype.WallFloor;
+            map[6, 8] = Blocktype.WallFloor;
+            map[10, 8] = Blocktype.WallFloor;
+
+            map[8, 0] = Blocktype.Death;
+            map[8, 1] = Blocktype.EmptySpace;
+            map[8, 2] = Blocktype.EmptySpace;
+            map[9, 0] = Blocktype.Death;
+            map[9, 1] = Blocktype.EmptySpace;
+            map[9, 2] = Blocktype.EmptySpace;
+
+            map[12, 0] = Blocktype.Death;
+            map[12, 1] = Blocktype.EmptySpace;
+            map[12, 2] = Blocktype.EmptySpace;
+            map[13, 0] = Blocktype.Death;
+            map[13, 1] = Blocktype.EmptySpace;
+            map[13, 2] = Blocktype.EmptySpace;
+            map[14, 0] = Blocktype.Death;
+            map[14, 1] = Blocktype.EmptySpace;
+            map[14, 2] = Blocktype.EmptySpace;
+
+            map[19, 3] = Blocktype.Death;
 
             return map;
         }
