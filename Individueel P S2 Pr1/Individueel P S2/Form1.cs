@@ -16,8 +16,7 @@ namespace Individueel_P_S2
         {
             InitializeComponent();
 
-            GetVisualTotal();
-            GetVisualLimited();
+            GetAllVisuals();
         }
 
         void GetVisualTotal()
@@ -26,9 +25,7 @@ namespace Individueel_P_S2
             {
                 string a = "";
 
-                a += Program.main.map.blocks[0, y].ToString();
-
-                for (int x = 1; x < Instellingen.mapsize[0]; x++)
+                for (int x = 0; x < Instellingen.mapsize[0]; x++)
                 {
                     a += " " + Program.main.map.blocks[x,y].ToString();
                 }
@@ -50,5 +47,26 @@ namespace Individueel_P_S2
                 listBox2.Items.Add(a);
             }
         }
+
+        public void GetAllVisuals()
+        {
+            GetVisualTotal();
+            GetVisualLimited();
+        }
+
+        private void buttonpressed(Inputtype type)
+        {
+            Program.main.InputRecieved(type);
+            GetAllVisuals();
+        }
+
+        private void buttonLeft_Click(object sender, EventArgs e)
+        { buttonpressed(Inputtype.Left); }
+        private void buttonRight_Click(object sender, EventArgs e)
+        { buttonpressed(Inputtype.Right); }
+        private void buttonJump_Click(object sender, EventArgs e)
+        { buttonpressed(Inputtype.Jump); }
+        private void buttonGetDown_Click(object sender, EventArgs e)
+        { buttonpressed(Inputtype.Get_Down); }
     }
 }

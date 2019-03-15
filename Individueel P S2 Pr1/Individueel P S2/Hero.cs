@@ -10,8 +10,6 @@ namespace Individueel_P_S2
     {
         public int x_loc;
         public int y_loc;
-        bool just_jumped;
-
 
     }
 }

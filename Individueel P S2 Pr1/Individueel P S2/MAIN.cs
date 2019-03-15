@@ -30,20 +30,7 @@ namespace Individueel_P_S2
                 }
             }
 
-            partofmap = DeterminePartOfMapOld();
             partofmap = DeterminePartOfMap();
-        }
-
-        int[] DeterminePartOfMapOld()
-        {
-            int[] partofmap = new int[4];
-
-            partofmap[0] = 0;
-            partofmap[1] = 0;
-            partofmap[2] = partofmap[0] + 16 - 1;
-            partofmap[3] = partofmap[1] + 10 - 1;
-
-            return partofmap;
         }
 
         int[] DeterminePartOfMap()
@@ -67,6 +54,11 @@ namespace Individueel_P_S2
             partofmap[2] = partofmap[0] + 15;
             partofmap[3] = partofmap[1] + 9;
             return partofmap;
+        }
+
+        public void InputRecieved(Inputtype type)
+        {
+
         }
     }
 }
