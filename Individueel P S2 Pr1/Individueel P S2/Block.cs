@@ -17,7 +17,10 @@ namespace Individueel_P_S2
 
         public override string ToString()
         {
-            return type.ToString()[0].ToString();
+            if (type != Blocktype.EmptySpace)
+            { return type.ToString()[0].ToString(); }
+            else
+            { return " "; }
         }
     }
 }

@@ -21,13 +21,17 @@ namespace Individueel_P_S2
 
         void GetVisualTotal()
         {
+            listBox1.Items.Clear();
             for (int y = Instellingen.mapsize[1] - 1; y >= 0; y--)
             {
                 string a = "";
 
                 for (int x = 0; x < Instellingen.mapsize[0]; x++)
                 {
-                    a += " " + Program.main.map.blocks[x,y].ToString();
+                    if (!(Program.main.hero.x_loc == x && Program.main.hero.y_loc == y))
+                    { a += " " + Program.main.map.blocks[x, y].ToString(); }
+                    else
+                    { a += " X"; }
                 }
 
                 listBox1.Items.Add(a);
@@ -35,13 +39,18 @@ namespace Individueel_P_S2
         }
         void GetVisualLimited()
         {
+            int[] yeet = Program.main.partofmap;
+            listBox2.Items.Clear();
             for (int y = Program.main.partofmap[3]; y >= Program.main.partofmap[1]; y--)
             {
                 string a = "";
 
                 for (int x = Program.main.partofmap[0]; x < Program.main.partofmap[2]; x++)
                 {
-                    a += " " + Program.main.map.blocks[x, y].ToString();
+                    if (!(Program.main.hero.x_loc == x && Program.main.hero.y_loc == y))
+                    { a += " " + Program.main.map.blocks[x, y].ToString(); }
+                    else
+                    { a += " X"; }
                 }
 
                 listBox2.Items.Add(a);

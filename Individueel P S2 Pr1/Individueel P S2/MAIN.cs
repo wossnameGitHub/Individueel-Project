@@ -26,6 +26,7 @@ namespace Individueel_P_S2
                     {
                         hero.x_loc = x;
                         hero.y_loc = y;
+                        map.blocks[x, y].type = Blocktype.EmptySpace;
                     }
                 }
             }
@@ -49,7 +50,7 @@ namespace Individueel_P_S2
             else if (hero.y_loc <= 2)
             { partofmap[1] = 0; }
             else
-            { partofmap[1] = Instellingen.mapsize[1] - 9; }
+            { partofmap[1] = Instellingen.mapsize[1] - 10; }//
 
             partofmap[2] = partofmap[0] + 15;
             partofmap[3] = partofmap[1] + 9;
@@ -58,7 +59,26 @@ namespace Individueel_P_S2
 
         public void InputRecieved(Inputtype type)
         {
-
+            switch (type)
+            {
+                case Inputtype.Left:
+                    if (hero.x_loc > 0)
+                    { hero.x_loc -= 1; }
+                    break;
+                case Inputtype.Right:
+                    if (hero.x_loc < map.blocks.GetLength(0) - 1)
+                    { hero.x_loc += 1; }
+                    break;
+                case Inputtype.Jump:
+                    if (hero.y_loc < map.blocks.GetLength(1) - 1)
+                    { hero.y_loc += 1; }
+                    break;
+                case Inputtype.Get_Down:
+                    if (hero.y_loc > 0)
+                    { hero.y_loc -= 1; }
+                    break;
+            }
+            partofmap = DeterminePartOfMap();
         }
     }
 }
