@@ -10,4 +10,5 @@ namespace Individueel_P_S2
 
     public enum Inputtype { Left, Right, Jump, Get_Down }
 
+    public enum Dim { X, Y }
 }

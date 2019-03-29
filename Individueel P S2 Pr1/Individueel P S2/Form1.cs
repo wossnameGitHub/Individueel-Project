@@ -76,13 +76,25 @@ namespace Individueel_P_S2
         }
 
         private void buttonLeft_Click(object sender, EventArgs e)
-        { buttonpressed(Inputtype.Left); }
+        {
+            buttonLeft.BackColor = Color.Yellow;
+            buttonpressed(Inputtype.Left);
+        }
         private void buttonRight_Click(object sender, EventArgs e)
-        { buttonpressed(Inputtype.Right); }
+        {
+            buttonRight.BackColor = Color.Yellow;
+            buttonpressed(Inputtype.Right);
+        }
         private void buttonJump_Click(object sender, EventArgs e)
-        { buttonpressed(Inputtype.Jump); }
+        {
+            buttonJump.BackColor = Color.Yellow;
+            buttonpressed(Inputtype.Jump);
+        }
         private void buttonGetDown_Click(object sender, EventArgs e)
-        { buttonpressed(Inputtype.Get_Down); }
+        {
+            buttonGetDown.BackColor = Color.Red;
+            buttonpressed(Inputtype.Get_Down);
+        }
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
@@ -94,7 +106,19 @@ namespace Individueel_P_S2
             buttonJump.Show();
             buttonGetDown.Show();
 
+            buttonTimePasses.Show();
             buttonStart.Text = "Restart Game";
+        }
+
+        private void buttonTimePasses_Click(object sender, EventArgs e)
+        {
+            buttonLeft.BackColor = Color.LightGray;
+            buttonRight.BackColor = Color.LightGray;
+            buttonJump.BackColor = Color.LightGray;
+            buttonGetDown.BackColor = Color.LightGray;
+
+            MainLogic.TimePasses();
+            GetAllVisuals();
         }
     }
 }

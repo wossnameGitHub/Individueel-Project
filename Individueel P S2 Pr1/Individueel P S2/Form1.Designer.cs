@@ -35,6 +35,7 @@
             this.buttonRight = new System.Windows.Forms.Button();
             this.buttonGetDown = new System.Windows.Forms.Button();
             this.buttonStart = new System.Windows.Forms.Button();
+            this.buttonTimePasses = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listBox1
@@ -59,45 +60,49 @@
             // 
             // buttonLeft
             // 
+            this.buttonLeft.BackColor = System.Drawing.Color.LightGray;
             this.buttonLeft.Location = new System.Drawing.Point(809, 315);
             this.buttonLeft.Name = "buttonLeft";
             this.buttonLeft.Size = new System.Drawing.Size(100, 39);
             this.buttonLeft.TabIndex = 2;
             this.buttonLeft.Text = "naar links";
-            this.buttonLeft.UseVisualStyleBackColor = true;
+            this.buttonLeft.UseVisualStyleBackColor = false;
             this.buttonLeft.Visible = false;
             this.buttonLeft.Click += new System.EventHandler(this.buttonLeft_Click);
             // 
             // buttonJump
             // 
+            this.buttonJump.BackColor = System.Drawing.Color.LightGray;
             this.buttonJump.Location = new System.Drawing.Point(915, 315);
             this.buttonJump.Name = "buttonJump";
             this.buttonJump.Size = new System.Drawing.Size(100, 39);
             this.buttonJump.TabIndex = 3;
             this.buttonJump.Text = "springen";
-            this.buttonJump.UseVisualStyleBackColor = true;
+            this.buttonJump.UseVisualStyleBackColor = false;
             this.buttonJump.Visible = false;
             this.buttonJump.Click += new System.EventHandler(this.buttonJump_Click);
             // 
             // buttonRight
             // 
+            this.buttonRight.BackColor = System.Drawing.Color.LightGray;
             this.buttonRight.Location = new System.Drawing.Point(1021, 315);
             this.buttonRight.Name = "buttonRight";
             this.buttonRight.Size = new System.Drawing.Size(100, 39);
             this.buttonRight.TabIndex = 4;
             this.buttonRight.Text = "naar rechts";
-            this.buttonRight.UseVisualStyleBackColor = true;
+            this.buttonRight.UseVisualStyleBackColor = false;
             this.buttonRight.Visible = false;
             this.buttonRight.Click += new System.EventHandler(this.buttonRight_Click);
             // 
             // buttonGetDown
             // 
+            this.buttonGetDown.BackColor = System.Drawing.Color.LightGray;
             this.buttonGetDown.Location = new System.Drawing.Point(1179, 315);
             this.buttonGetDown.Name = "buttonGetDown";
             this.buttonGetDown.Size = new System.Drawing.Size(100, 39);
             this.buttonGetDown.TabIndex = 5;
             this.buttonGetDown.Text = "get down";
-            this.buttonGetDown.UseVisualStyleBackColor = true;
+            this.buttonGetDown.UseVisualStyleBackColor = false;
             this.buttonGetDown.Visible = false;
             this.buttonGetDown.Click += new System.EventHandler(this.buttonGetDown_Click);
             // 
@@ -111,11 +116,24 @@
             this.buttonStart.UseVisualStyleBackColor = true;
             this.buttonStart.Click += new System.EventHandler(this.buttonStart_Click);
             // 
+            // buttonTimePasses
+            // 
+            this.buttonTimePasses.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.buttonTimePasses.Location = new System.Drawing.Point(541, 327);
+            this.buttonTimePasses.Name = "buttonTimePasses";
+            this.buttonTimePasses.Size = new System.Drawing.Size(139, 39);
+            this.buttonTimePasses.TabIndex = 7;
+            this.buttonTimePasses.Text = "Time Passes";
+            this.buttonTimePasses.UseVisualStyleBackColor = false;
+            this.buttonTimePasses.Visible = false;
+            this.buttonTimePasses.Click += new System.EventHandler(this.buttonTimePasses_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1411, 378);
+            this.Controls.Add(this.buttonTimePasses);
             this.Controls.Add(this.buttonStart);
             this.Controls.Add(this.buttonGetDown);
             this.Controls.Add(this.buttonRight);
@@ -138,6 +156,7 @@
         private System.Windows.Forms.Button buttonRight;
         private System.Windows.Forms.Button buttonGetDown;
         private System.Windows.Forms.Button buttonStart;
+        private System.Windows.Forms.Button buttonTimePasses;
     }
 }
 

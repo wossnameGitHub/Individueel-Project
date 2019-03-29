@@ -8,8 +8,9 @@ namespace Individueel_P_S2.Logic
 {
     public static class MainLogic
     {
-        public static Map map;
-        public static Hero hero;
+        private static Map map;
+        private static Hero hero;
+        private static List<Inputtype> inputs = new List<Inputtype>();
 
         private static int[] DeterminePartOfMap()
         {
@@ -42,7 +43,6 @@ namespace Individueel_P_S2.Logic
             DisplayHolder.partofmap = DeterminePartOfMap();
         }
 
-
         public static void StartGame()
         {
             map = new Map(Instellingen.mapsize, Instellingen.given_map);
@@ -65,29 +65,45 @@ namespace Individueel_P_S2.Logic
             UpdateDisplayHolder();
         }
 
-        public static void InputRecieved(Inputtype type)
+        private static bool ValidToJump()
         {
-            switch (type)
+            return map.blocks[hero.x_loc, hero.y_loc - 1].type == Blocktype.WallFloor;
+        }
+        
+
+        public static void TimePasses()
+        {
+            if (inputs.Contains(Inputtype.Get_Down))
             {
-                case Inputtype.Left:
-                    if (hero.x_loc > 0)
-                    { hero.x_loc -= 1; }
-                    break;
-                case Inputtype.Right:
-                    if (hero.x_loc < map.blocks.GetLength(0) - 1)
-                    { hero.x_loc += 1; }
-                    break;
-                case Inputtype.Jump:
-                    if (hero.y_loc < map.blocks.GetLength(1) - 1)
-                    { hero.y_loc += 1; }
-                    break;
-                case Inputtype.Get_Down:
-                    if (hero.y_loc > 0)
-                    { hero.y_loc -= 1; }
-                    break;
+                inputs.Clear();
+                hero.TryMoving(Dim.Y, -1, map);
             }
 
+            if (inputs.Contains(Inputtype.Jump) && ValidToJump())
+            {
+                hero.TryMoving(Dim.Y, 1, map);
+                hero.TryMoving(Dim.Y, 1, map);
+            }
+
+            if (inputs.Contains(Inputtype.Left) && inputs.Contains(Inputtype.Right))
+            { inputs.Clear(); }
+
+            if (inputs.Contains(Inputtype.Left))
+            { hero.TryMoving(Dim.X, -1, map); }
+
+            if (inputs.Contains(Inputtype.Right))
+            { hero.TryMoving(Dim.X, 1, map); }
+
+            hero.HitHisHead = false;
+
+            inputs.Clear();
             UpdateDisplayHolder();
+        }
+
+        public static void InputRecieved(Inputtype type)
+        {
+            if (!inputs.Contains(type))
+            { inputs.Add(type); }
         }
     }
 }
