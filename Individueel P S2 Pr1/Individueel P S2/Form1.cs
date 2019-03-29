@@ -15,7 +15,9 @@ namespace Individueel_P_S2
     public partial class Form1 : Form
     {
         public Form1()
-        { InitializeComponent(); }
+        {
+            InitializeComponent();
+        }
 
         private void GetVisualTotal()
         {
@@ -77,6 +79,7 @@ namespace Individueel_P_S2
         {
             GetVisualTotal();
             GetVisualLimited();
+            labelTimer.Text = "Time: " + time.ToString();
         }
 
         private void buttonpressed(Inputtype type)
@@ -104,6 +107,7 @@ namespace Individueel_P_S2
         private void buttonStart_Click(object sender, EventArgs e)
         {
             MainLogic.StartGame();
+            time = 0;
             GetAllVisuals();
 
             buttonLeft.Show();
@@ -113,8 +117,21 @@ namespace Individueel_P_S2
             buttonRight.BackColor = Color.LightGray;
             buttonJump.BackColor = Color.LightGray;
 
+            buttonRealTime.Show();
             buttonTimePasses.Show();
             buttonStart.Text = "Restart Game";
+            labelTimer.Show();
+            
+
+            /* Adds the event and the event handler for the method that will 
+               process the timer event to the timer. */
+            myTimer = new Timer();
+            myTimer.Tick += new EventHandler(TimerEventProcessor);
+
+            myTimer.Interval = 1000;
+            myTimer.Start();
+            if (!RealTimer)
+            { myTimer.Stop(); }
         }
 
         private void TIME_PASSES()
@@ -123,16 +140,68 @@ namespace Individueel_P_S2
             buttonRight.BackColor = Color.LightGray;
             buttonJump.BackColor = Color.LightGray;
 
+            time += 1;
+
             MainLogic.TimePasses();
             GetAllVisuals();
 
             if (!DisplayHolder.heroAlive)
             {
                 buttonTimePasses.Hide();
+                buttonLeft.Hide();
+                buttonRight.Hide();
+                buttonJump.Hide();
+
+                myTimer.Stop();
             }
         }
 
         private void buttonTimePasses_Click(object sender, EventArgs e)
         { TIME_PASSES(); }
+
+
+
+
+        static int time;
+
+        // hieronder stuff dat te maken heeft met de real-life timer
+
+        static Timer myTimer;
+        static bool RealTimer = false;
+
+        // This is the method to run when the timer is raised.
+        private static void TimerEventProcessor(object sender, EventArgs e)
+        {
+            // Stops the timer
+            myTimer.Stop();
+
+            Program.moetmaar.TIME_PASSES();
+
+            // Restarts the timer
+            if (DisplayHolder.heroAlive)
+            { myTimer.Enabled = true; }
+        }
+
+        private void buttonRealTime_Click(object sender, EventArgs e)
+        {
+            if (RealTimer)
+            {
+                RealTimer = false;
+                myTimer.Stop();
+                if (DisplayHolder.heroAlive)
+                { buttonTimePasses.Show(); }
+                buttonRealTime.Text = "Real-time: OFF";
+                buttonRealTime.BackColor = Color.Tomato;
+            }
+            else
+            {
+                RealTimer = true;
+                if (DisplayHolder.heroAlive)
+                { myTimer.Enabled = true; }
+                buttonTimePasses.Hide();
+                buttonRealTime.Text = "Real-time: ON";
+                buttonRealTime.BackColor = Color.LimeGreen;
+            }
+        }
     }
 }

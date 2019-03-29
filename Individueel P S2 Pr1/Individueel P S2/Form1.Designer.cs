@@ -35,6 +35,8 @@
             this.buttonRight = new System.Windows.Forms.Button();
             this.buttonStart = new System.Windows.Forms.Button();
             this.buttonTimePasses = new System.Windows.Forms.Button();
+            this.buttonRealTime = new System.Windows.Forms.Button();
+            this.labelTimer = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // listBox1
@@ -115,11 +117,35 @@
             this.buttonTimePasses.Visible = false;
             this.buttonTimePasses.Click += new System.EventHandler(this.buttonTimePasses_Click);
             // 
+            // buttonRealTime
+            // 
+            this.buttonRealTime.BackColor = System.Drawing.Color.Tomato;
+            this.buttonRealTime.Location = new System.Drawing.Point(374, 327);
+            this.buttonRealTime.Name = "buttonRealTime";
+            this.buttonRealTime.Size = new System.Drawing.Size(139, 39);
+            this.buttonRealTime.TabIndex = 8;
+            this.buttonRealTime.Text = "Real-time: OFF";
+            this.buttonRealTime.UseVisualStyleBackColor = false;
+            this.buttonRealTime.Visible = false;
+            this.buttonRealTime.Click += new System.EventHandler(this.buttonRealTime_Click);
+            // 
+            // labelTimer
+            // 
+            this.labelTimer.AutoSize = true;
+            this.labelTimer.Location = new System.Drawing.Point(700, 337);
+            this.labelTimer.Name = "labelTimer";
+            this.labelTimer.Size = new System.Drawing.Size(56, 17);
+            this.labelTimer.TabIndex = 9;
+            this.labelTimer.Text = "Time: X";
+            this.labelTimer.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1411, 378);
+            this.Controls.Add(this.labelTimer);
+            this.Controls.Add(this.buttonRealTime);
             this.Controls.Add(this.buttonTimePasses);
             this.Controls.Add(this.buttonStart);
             this.Controls.Add(this.buttonRight);
@@ -130,6 +156,7 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -142,6 +169,8 @@
         private System.Windows.Forms.Button buttonRight;
         private System.Windows.Forms.Button buttonStart;
         private System.Windows.Forms.Button buttonTimePasses;
+        private System.Windows.Forms.Button buttonRealTime;
+        private System.Windows.Forms.Label labelTimer;
     }
 }
 
