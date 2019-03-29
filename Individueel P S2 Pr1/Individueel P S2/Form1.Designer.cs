@@ -65,6 +65,7 @@
             this.buttonLeft.TabIndex = 2;
             this.buttonLeft.Text = "naar links";
             this.buttonLeft.UseVisualStyleBackColor = true;
+            this.buttonLeft.Visible = false;
             this.buttonLeft.Click += new System.EventHandler(this.buttonLeft_Click);
             // 
             // buttonJump
@@ -75,6 +76,7 @@
             this.buttonJump.TabIndex = 3;
             this.buttonJump.Text = "springen";
             this.buttonJump.UseVisualStyleBackColor = true;
+            this.buttonJump.Visible = false;
             this.buttonJump.Click += new System.EventHandler(this.buttonJump_Click);
             // 
             // buttonRight
@@ -85,6 +87,7 @@
             this.buttonRight.TabIndex = 4;
             this.buttonRight.Text = "naar rechts";
             this.buttonRight.UseVisualStyleBackColor = true;
+            this.buttonRight.Visible = false;
             this.buttonRight.Click += new System.EventHandler(this.buttonRight_Click);
             // 
             // buttonGetDown
@@ -95,6 +98,7 @@
             this.buttonGetDown.TabIndex = 5;
             this.buttonGetDown.Text = "get down";
             this.buttonGetDown.UseVisualStyleBackColor = true;
+            this.buttonGetDown.Visible = false;
             this.buttonGetDown.Click += new System.EventHandler(this.buttonGetDown_Click);
             // 
             // buttonStart

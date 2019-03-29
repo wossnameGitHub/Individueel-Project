@@ -88,6 +88,13 @@ namespace Individueel_P_S2
         {
             MainLogic.StartGame();
             GetAllVisuals();
+
+            buttonLeft.Show();
+            buttonRight.Show();
+            buttonJump.Show();
+            buttonGetDown.Show();
+
+            buttonStart.Text = "Restart Game";
         }
     }
 }
