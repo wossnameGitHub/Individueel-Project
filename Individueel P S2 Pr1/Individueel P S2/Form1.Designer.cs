@@ -34,6 +34,7 @@
             this.buttonJump = new System.Windows.Forms.Button();
             this.buttonRight = new System.Windows.Forms.Button();
             this.buttonGetDown = new System.Windows.Forms.Button();
+            this.buttonStart = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listBox1
@@ -96,11 +97,22 @@
             this.buttonGetDown.UseVisualStyleBackColor = true;
             this.buttonGetDown.Click += new System.EventHandler(this.buttonGetDown_Click);
             // 
+            // buttonStart
+            // 
+            this.buttonStart.Location = new System.Drawing.Point(13, 327);
+            this.buttonStart.Name = "buttonStart";
+            this.buttonStart.Size = new System.Drawing.Size(139, 39);
+            this.buttonStart.TabIndex = 6;
+            this.buttonStart.Text = "Start Game";
+            this.buttonStart.UseVisualStyleBackColor = true;
+            this.buttonStart.Click += new System.EventHandler(this.buttonStart_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1411, 378);
+            this.Controls.Add(this.buttonStart);
             this.Controls.Add(this.buttonGetDown);
             this.Controls.Add(this.buttonRight);
             this.Controls.Add(this.buttonJump);
@@ -121,6 +133,7 @@
         private System.Windows.Forms.Button buttonJump;
         private System.Windows.Forms.Button buttonRight;
         private System.Windows.Forms.Button buttonGetDown;
+        private System.Windows.Forms.Button buttonStart;
     }
 }
 

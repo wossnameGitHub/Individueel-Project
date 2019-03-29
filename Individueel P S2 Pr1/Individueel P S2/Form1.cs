@@ -8,56 +8,62 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using Individueel_P_S2.Logic;
+
 namespace Individueel_P_S2
 {
     public partial class Form1 : Form
     {
         public Form1()
-        {
-            InitializeComponent();
+        { InitializeComponent(); }
 
-            GetAllVisuals();
-        }
-
-        void GetVisualTotal()
+        private void GetVisualTotal()
         {
             listBox1.Items.Clear();
-            for (int y = Instellingen.mapsize[1] - 1; y >= 0; y--)
+
+            Block[,] blocks = DisplayHolder.map.blocks;
+            
+            for (int y = blocks.GetLength(1) - 1; y >= 0; y--)
             {
                 string a = "";
 
-                for (int x = 0; x < Instellingen.mapsize[0]; x++)
+                for (int x = 0; x < blocks.GetLength(0); x++)
                 {
-                    if (!(Program.main.hero.x_loc == x && Program.main.hero.y_loc == y))
-                    { a += " " + Program.main.map.blocks[x, y].ToString(); }
+                    a += " ";
+                    if (!(DisplayHolder.heroLocation[0] == x && DisplayHolder.heroLocation[1] == y))
+                    { a += blocks[x, y].ToString(); }
                     else
-                    { a += " X"; }
+                    { a += "X"; }
                 }
 
                 listBox1.Items.Add(a);
             }
         }
-        void GetVisualLimited()
+        private void GetVisualLimited()
         {
-            int[] yeet = Program.main.partofmap;
             listBox2.Items.Clear();
-            for (int y = Program.main.partofmap[3]; y >= Program.main.partofmap[1]; y--)
+
+            Block[,] blocks = DisplayHolder.map.blocks;
+            int[] part = DisplayHolder.partofmap;
+
+            for (int y = part[3]; y >= part[1]; y--)
             {
                 string a = "";
 
-                for (int x = Program.main.partofmap[0]; x < Program.main.partofmap[2]; x++)
+                for (int x = part[0]; x < part[2]; x++)
                 {
-                    if (!(Program.main.hero.x_loc == x && Program.main.hero.y_loc == y))
-                    { a += " " + Program.main.map.blocks[x, y].ToString(); }
+                    a += " ";
+                    if (!(DisplayHolder.heroLocation[0] == x && DisplayHolder.heroLocation[1] == y))
+                    { a += blocks[x, y].ToString(); }
                     else
-                    { a += " X"; }
+                    { a += "X"; }
                 }
 
                 listBox2.Items.Add(a);
             }
         }
 
-        public void GetAllVisuals()
+        private void GetAllVisuals()
         {
             GetVisualTotal();
             GetVisualLimited();
@@ -65,7 +71,7 @@ namespace Individueel_P_S2
 
         private void buttonpressed(Inputtype type)
         {
-            Program.main.InputRecieved(type);
+            MainLogic.InputRecieved(type);
             GetAllVisuals();
         }
 
@@ -77,5 +83,11 @@ namespace Individueel_P_S2
         { buttonpressed(Inputtype.Jump); }
         private void buttonGetDown_Click(object sender, EventArgs e)
         { buttonpressed(Inputtype.Get_Down); }
+
+        private void buttonStart_Click(object sender, EventArgs e)
+        {
+            MainLogic.StartGame();
+            GetAllVisuals();
+        }
     }
 }

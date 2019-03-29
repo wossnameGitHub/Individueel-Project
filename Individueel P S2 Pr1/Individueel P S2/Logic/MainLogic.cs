@@ -4,37 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Individueel_P_S2
+namespace Individueel_P_S2.Logic
 {
-    public class MAIN
+    public static class MainLogic
     {
-        public Map map;
-        public Hero hero;
-        public int[] partofmap = new int[4]; // lowx lowy, highx, highy
+        public static Map map;
+        public static Hero hero;
 
-
-        public MAIN()
-        {
-            map = new Map();
-            hero = new Hero();
-
-            for (int x = 0; x < map.blocks.GetLength(0); x++)
-            {
-                for (int y = 0; y < map.blocks.GetLength(1); y++)
-                {
-                    if (map.blocks[x,y].type == Blocktype.SpawnHero)
-                    {
-                        hero.x_loc = x;
-                        hero.y_loc = y;
-                        map.blocks[x, y].type = Blocktype.EmptySpace;
-                    }
-                }
-            }
-
-            partofmap = DeterminePartOfMap();
-        }
-
-        int[] DeterminePartOfMap()
+        private static int[] DeterminePartOfMap()
         {
             int[] partofmap = new int[4];
 
@@ -57,7 +34,38 @@ namespace Individueel_P_S2
             return partofmap;
         }
 
-        public void InputRecieved(Inputtype type)
+        private static void UpdateDisplayHolder()
+        {
+            DisplayHolder.heroLocation = new int[2] { hero.x_loc, hero.y_loc };
+
+            DisplayHolder.map = map;
+            DisplayHolder.partofmap = DeterminePartOfMap();
+        }
+
+
+        public static void StartGame()
+        {
+            map = new Map(Instellingen.mapsize, Instellingen.given_map);
+            hero = new Hero();
+
+            // determine the starting location for the Hero
+            for (int x = 0; x < map.blocks.GetLength(0); x++)
+            {
+                for (int y = 0; y < map.blocks.GetLength(1); y++)
+                {
+                    if (map.blocks[x, y].type == Blocktype.SpawnHero)
+                    {
+                        hero.x_loc = x;
+                        hero.y_loc = y;
+                        map.blocks[x, y].type = Blocktype.EmptySpace;
+                    }
+                }
+            }
+
+            UpdateDisplayHolder();
+        }
+
+        public static void InputRecieved(Inputtype type)
         {
             switch (type)
             {
@@ -78,7 +86,8 @@ namespace Individueel_P_S2
                     { hero.y_loc -= 1; }
                     break;
             }
-            partofmap = DeterminePartOfMap();
+
+            UpdateDisplayHolder();
         }
     }
 }
