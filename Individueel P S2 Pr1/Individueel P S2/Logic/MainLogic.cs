@@ -38,6 +38,7 @@ namespace Individueel_P_S2.Logic
         private static void UpdateDisplayHolder()
         {
             DisplayHolder.heroLocation = new int[2] { hero.x_loc, hero.y_loc };
+            DisplayHolder.heroAlive = hero.Alive;
 
             DisplayHolder.map = map;
             DisplayHolder.partofmap = DeterminePartOfMap();
@@ -65,21 +66,27 @@ namespace Individueel_P_S2.Logic
             UpdateDisplayHolder();
         }
 
+        private static void DoTheFallingThing()
+        {
+            if (!hero.JustJumped)
+            {
+                hero.TryMoving(Dim.Y, -1, map);
+            }
+        }
+
         private static bool ValidToJump()
         {
             return map.blocks[hero.x_loc, hero.y_loc - 1].type == Blocktype.WallFloor;
         }
-        
 
         public static void TimePasses()
         {
-            if (inputs.Contains(Inputtype.Get_Down))
-            {
-                inputs.Clear();
-                hero.TryMoving(Dim.Y, -1, map);
-            }
+            bool validjump = ValidToJump();
 
-            if (inputs.Contains(Inputtype.Jump) && ValidToJump())
+            DoTheFallingThing();
+            hero.JustJumped = false;
+
+            if (inputs.Contains(Inputtype.Jump) && validjump)
             {
                 hero.TryMoving(Dim.Y, 1, map);
                 hero.TryMoving(Dim.Y, 1, map);

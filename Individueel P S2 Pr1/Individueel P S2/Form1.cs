@@ -33,7 +33,12 @@ namespace Individueel_P_S2
                     if (!(DisplayHolder.heroLocation[0] == x && DisplayHolder.heroLocation[1] == y))
                     { a += blocks[x, y].ToString(); }
                     else
-                    { a += "X"; }
+                    {
+                        if (DisplayHolder.heroAlive)
+                        { a += "X"; }
+                        else
+                        { a += "F"; }
+                    }
                 }
 
                 listBox1.Items.Add(a);
@@ -56,7 +61,12 @@ namespace Individueel_P_S2
                     if (!(DisplayHolder.heroLocation[0] == x && DisplayHolder.heroLocation[1] == y))
                     { a += blocks[x, y].ToString(); }
                     else
-                    { a += "X"; }
+                    {
+                        if (DisplayHolder.heroAlive)
+                        { a += "X"; }
+                        else
+                        { a += "F"; }
+                    }
                 }
 
                 listBox2.Items.Add(a);
@@ -90,11 +100,6 @@ namespace Individueel_P_S2
             buttonJump.BackColor = Color.Yellow;
             buttonpressed(Inputtype.Jump);
         }
-        private void buttonGetDown_Click(object sender, EventArgs e)
-        {
-            buttonGetDown.BackColor = Color.Red;
-            buttonpressed(Inputtype.Get_Down);
-        }
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
@@ -104,21 +109,30 @@ namespace Individueel_P_S2
             buttonLeft.Show();
             buttonRight.Show();
             buttonJump.Show();
-            buttonGetDown.Show();
+            buttonLeft.BackColor = Color.LightGray;
+            buttonRight.BackColor = Color.LightGray;
+            buttonJump.BackColor = Color.LightGray;
 
             buttonTimePasses.Show();
             buttonStart.Text = "Restart Game";
         }
 
-        private void buttonTimePasses_Click(object sender, EventArgs e)
+        private void TIME_PASSES()
         {
             buttonLeft.BackColor = Color.LightGray;
             buttonRight.BackColor = Color.LightGray;
             buttonJump.BackColor = Color.LightGray;
-            buttonGetDown.BackColor = Color.LightGray;
 
             MainLogic.TimePasses();
             GetAllVisuals();
+
+            if (!DisplayHolder.heroAlive)
+            {
+                buttonTimePasses.Hide();
+            }
         }
+
+        private void buttonTimePasses_Click(object sender, EventArgs e)
+        { TIME_PASSES(); }
     }
 }

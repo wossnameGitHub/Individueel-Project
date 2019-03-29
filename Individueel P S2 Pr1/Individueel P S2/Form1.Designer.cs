@@ -33,7 +33,6 @@
             this.buttonLeft = new System.Windows.Forms.Button();
             this.buttonJump = new System.Windows.Forms.Button();
             this.buttonRight = new System.Windows.Forms.Button();
-            this.buttonGetDown = new System.Windows.Forms.Button();
             this.buttonStart = new System.Windows.Forms.Button();
             this.buttonTimePasses = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -94,18 +93,6 @@
             this.buttonRight.Visible = false;
             this.buttonRight.Click += new System.EventHandler(this.buttonRight_Click);
             // 
-            // buttonGetDown
-            // 
-            this.buttonGetDown.BackColor = System.Drawing.Color.LightGray;
-            this.buttonGetDown.Location = new System.Drawing.Point(1179, 315);
-            this.buttonGetDown.Name = "buttonGetDown";
-            this.buttonGetDown.Size = new System.Drawing.Size(100, 39);
-            this.buttonGetDown.TabIndex = 5;
-            this.buttonGetDown.Text = "get down";
-            this.buttonGetDown.UseVisualStyleBackColor = false;
-            this.buttonGetDown.Visible = false;
-            this.buttonGetDown.Click += new System.EventHandler(this.buttonGetDown_Click);
-            // 
             // buttonStart
             // 
             this.buttonStart.Location = new System.Drawing.Point(13, 327);
@@ -135,7 +122,6 @@
             this.ClientSize = new System.Drawing.Size(1411, 378);
             this.Controls.Add(this.buttonTimePasses);
             this.Controls.Add(this.buttonStart);
-            this.Controls.Add(this.buttonGetDown);
             this.Controls.Add(this.buttonRight);
             this.Controls.Add(this.buttonJump);
             this.Controls.Add(this.buttonLeft);
@@ -154,7 +140,6 @@
         private System.Windows.Forms.Button buttonLeft;
         private System.Windows.Forms.Button buttonJump;
         private System.Windows.Forms.Button buttonRight;
-        private System.Windows.Forms.Button buttonGetDown;
         private System.Windows.Forms.Button buttonStart;
         private System.Windows.Forms.Button buttonTimePasses;
     }

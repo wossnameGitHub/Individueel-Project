@@ -9,6 +9,7 @@ namespace Individueel_P_S2.Logic
     public static class DisplayHolder
     {
         public static int[] heroLocation;
+        public static bool heroAlive;
 
         public static Map map;
         public static int[] partofmap; // lowx, lowy, highx, highy
