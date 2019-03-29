@@ -32,14 +32,16 @@ namespace Individueel_P_S2
                 for (int x = 0; x < blocks.GetLength(0); x++)
                 {
                     a += " ";
-                    if (!(DisplayHolder.heroLocation[0] == x && DisplayHolder.heroLocation[1] == y))
+                    if (!(DisplayHolder.hero.x_loc == x && DisplayHolder.hero.y_loc == y))
                     { a += blocks[x, y].ToString(); }
                     else
                     {
-                        if (DisplayHolder.heroAlive)
-                        { a += "X"; }
-                        else
+                        if (!DisplayHolder.hero.Alive)
                         { a += "F"; }
+                        else if (DisplayHolder.hero.JustJumped)
+                        { a += "#"; }
+                        else
+                        { a += "X"; }
                     }
                 }
 
@@ -60,14 +62,16 @@ namespace Individueel_P_S2
                 for (int x = part[0]; x < part[2]; x++)
                 {
                     a += " ";
-                    if (!(DisplayHolder.heroLocation[0] == x && DisplayHolder.heroLocation[1] == y))
+                    if (!(DisplayHolder.hero.x_loc == x && DisplayHolder.hero.y_loc == y))
                     { a += blocks[x, y].ToString(); }
                     else
                     {
-                        if (DisplayHolder.heroAlive)
-                        { a += "X"; }
-                        else
+                        if (!DisplayHolder.hero.Alive)
                         { a += "F"; }
+                        else if (DisplayHolder.hero.JustJumped)
+                        { a += "#"; }
+                        else
+                        { a += "X"; }
                     }
                 }
 
@@ -145,7 +149,7 @@ namespace Individueel_P_S2
             MainLogic.TimePasses();
             GetAllVisuals();
 
-            if (!DisplayHolder.heroAlive)
+            if (!DisplayHolder.hero.Alive)
             {
                 buttonTimePasses.Hide();
                 buttonLeft.Hide();
@@ -178,7 +182,7 @@ namespace Individueel_P_S2
             Program.moetmaar.TIME_PASSES();
 
             // Restarts the timer
-            if (DisplayHolder.heroAlive)
+            if (DisplayHolder.hero.Alive)
             { myTimer.Enabled = true; }
         }
 
@@ -188,7 +192,7 @@ namespace Individueel_P_S2
             {
                 RealTimer = false;
                 myTimer.Stop();
-                if (DisplayHolder.heroAlive)
+                if (DisplayHolder.hero.Alive)
                 { buttonTimePasses.Show(); }
                 buttonRealTime.Text = "Real-time: OFF";
                 buttonRealTime.BackColor = Color.Tomato;
@@ -196,7 +200,7 @@ namespace Individueel_P_S2
             else
             {
                 RealTimer = true;
-                if (DisplayHolder.heroAlive)
+                if (DisplayHolder.hero.Alive)
                 { myTimer.Enabled = true; }
                 buttonTimePasses.Hide();
                 buttonRealTime.Text = "Real-time: ON";

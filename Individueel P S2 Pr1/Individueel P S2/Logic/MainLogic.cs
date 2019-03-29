@@ -37,9 +37,7 @@ namespace Individueel_P_S2.Logic
 
         private static void UpdateDisplayHolder()
         {
-            DisplayHolder.heroLocation = new int[2] { hero.x_loc, hero.y_loc };
-            DisplayHolder.heroAlive = hero.Alive;
-
+            DisplayHolder.hero = hero;
             DisplayHolder.map = map;
             DisplayHolder.partofmap = DeterminePartOfMap();
         }
