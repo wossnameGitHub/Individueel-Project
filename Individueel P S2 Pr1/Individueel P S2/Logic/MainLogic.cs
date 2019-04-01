@@ -6,29 +6,35 @@ using System.Threading.Tasks;
 
 namespace Individueel_P_S2.Logic
 {
-    public static class MainLogic
+    static class MainLogic
     {
+        // new shit
+        public static Game currentGame;
+
+
+
+        // old shit
         private static Map map;
         private static Hero hero;
-        private static List<Inputtype> inputs = new List<Inputtype>();
+        private static List<InputType> inputs = new List<InputType>();
 
         private static int[] DeterminePartOfMap()
         {
             int[] partofmap = new int[4];
 
-            if (hero.x_loc > 3 && hero.x_loc < Instellingen.mapsize[0] - 11)
-            { partofmap[0] = hero.x_loc - 4; }
-            else if (hero.x_loc <= 3)
+            if (hero.x > 3 && hero.x < TEMP_Instellingen.mapsize[0] - 11)
+            { partofmap[0] = hero.x - 4; }
+            else if (hero.x <= 3)
             { partofmap[0] = 0; }
             else
-            { partofmap[0] = Instellingen.mapsize[0] - 15; }
+            { partofmap[0] = TEMP_Instellingen.mapsize[0] - 15; }
 
-            if (hero.y_loc > 2 && hero.y_loc < Instellingen.mapsize[1] - 6)
-            { partofmap[1] = hero.y_loc - 3; }
-            else if (hero.y_loc <= 2)
+            if (hero.y > 2 && hero.y < TEMP_Instellingen.mapsize[1] - 6)
+            { partofmap[1] = hero.y - 3; }
+            else if (hero.y <= 2)
             { partofmap[1] = 0; }
             else
-            { partofmap[1] = Instellingen.mapsize[1] - 10; }//
+            { partofmap[1] = TEMP_Instellingen.mapsize[1] - 10; }//
 
             partofmap[2] = partofmap[0] + 15;
             partofmap[3] = partofmap[1] + 9;
@@ -44,7 +50,7 @@ namespace Individueel_P_S2.Logic
 
         public static void StartGame()
         {
-            map = new Map(Instellingen.mapsize, Instellingen.given_map);
+            map = new Map(TEMP_Instellingen.mapsize, TEMP_Instellingen.given_map);
             hero = new Hero();
 
             // determine the starting location for the Hero
@@ -52,11 +58,11 @@ namespace Individueel_P_S2.Logic
             {
                 for (int y = 0; y < map.blocks.GetLength(1); y++)
                 {
-                    if (map.blocks[x, y].type == Blocktype.SpawnHero)
+                    if (map.blocks[x, y].type == BlockType.SpawnHero)
                     {
-                        hero.x_loc = x;
-                        hero.y_loc = y;
-                        map.blocks[x, y].type = Blocktype.EmptySpace;
+                        hero.x = x;
+                        hero.y = y;
+                        map.blocks[x, y].type = BlockType.EmptySpace;
                     }
                 }
             }
@@ -66,7 +72,7 @@ namespace Individueel_P_S2.Logic
 
         private static void DoTheFallingThing()
         {
-            if (!hero.JustJumped)
+            if (!hero.status.JustJumped)
             {
                 hero.TryMoving(Dim.Y, -1, map);
             }
@@ -74,7 +80,7 @@ namespace Individueel_P_S2.Logic
 
         private static bool ValidToJump()
         {
-            return map.blocks[hero.x_loc, hero.y_loc - 1].type == Blocktype.WallFloor;
+            return map.blocks[hero.x, hero.y - 1].type == BlockType.WallFloor;
         }
 
         public static void TimePasses()
@@ -82,30 +88,30 @@ namespace Individueel_P_S2.Logic
             bool validjump = ValidToJump();
 
             DoTheFallingThing();
-            hero.JustJumped = false;
+            hero.status.JustJumped = false;
 
-            if (inputs.Contains(Inputtype.Jump) && validjump)
+            if (inputs.Contains(InputType.Jump) && validjump)
             {
                 hero.TryMoving(Dim.Y, 1, map);
                 hero.TryMoving(Dim.Y, 1, map);
             }
 
-            if (inputs.Contains(Inputtype.Left) && inputs.Contains(Inputtype.Right))
+            if (inputs.Contains(InputType.Left) && inputs.Contains(InputType.Right))
             { inputs.Clear(); }
 
-            if (inputs.Contains(Inputtype.Left))
+            if (inputs.Contains(InputType.Left))
             { hero.TryMoving(Dim.X, -1, map); }
 
-            if (inputs.Contains(Inputtype.Right))
+            if (inputs.Contains(InputType.Right))
             { hero.TryMoving(Dim.X, 1, map); }
 
-            hero.HitHisHead = false;
+            hero.status.HitHisHead = false;
 
             inputs.Clear();
             UpdateDisplayHolder();
         }
 
-        public static void InputRecieved(Inputtype type)
+        public static void InputRecieved(InputType type)
         {
             if (!inputs.Contains(type))
             { inputs.Add(type); }

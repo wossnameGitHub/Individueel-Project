@@ -6,18 +6,22 @@ using System.Threading.Tasks;
 
 namespace Individueel_P_S2.Logic
 {
-    public class Block
+    class Block
     {
-        public Blocktype type;
+        public BlockType type;
+        public BlockVersion version;
 
-        public Block(Blocktype t)
+        public Block(BlockType t)
         {
             type = t;
         }
 
+        /// <summary>
+        /// Deze methode is tijdelijk, aangezien dit niet relevant gaat zijn als ik verder kom dan ASCII art
+        /// </summary>
         public override string ToString()
         {
-            if (type != Blocktype.EmptySpace)
+            if (type != BlockType.EmptySpace)
             { return type.ToString()[0].ToString(); }
             else
             { return " "; }

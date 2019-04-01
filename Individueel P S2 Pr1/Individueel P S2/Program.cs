@@ -8,7 +8,7 @@ namespace Individueel_P_S2
 {
     static class Program
     {
-        public static Form1 moetmaar;
+        public static TEMP_Form moetmaar;
 
         /// <summary>
         /// The main entry point for the application.
@@ -19,7 +19,7 @@ namespace Individueel_P_S2
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            moetmaar = new Form1();
+            moetmaar = new TEMP_Form();
             Application.Run(moetmaar);
         }
     }

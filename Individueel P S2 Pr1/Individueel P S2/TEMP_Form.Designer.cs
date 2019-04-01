@@ -1,6 +1,6 @@
 ﻿namespace Individueel_P_S2
 {
-    partial class Form1
+    partial class TEMP_Form
     {
         /// <summary>
         /// Required designer variable.

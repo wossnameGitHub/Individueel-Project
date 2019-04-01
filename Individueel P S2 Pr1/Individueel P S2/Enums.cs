@@ -6,9 +6,13 @@ using System.Threading.Tasks;
 
 namespace Individueel_P_S2
 {
-    public enum Blocktype { EmptySpace, WallFloor, Death, SpawnHero }
+    public enum BlockType { EmptySpace, WallFloor, Death, SpawnHero, HERO }
 
-    public enum Inputtype { Left, Right, Jump }
+    public enum BlockVersion { }
+
+    public enum MapAmbiance { }
+
+    public enum InputType { Left, Right, Jump }
 
     public enum Dim { X, Y }
 }

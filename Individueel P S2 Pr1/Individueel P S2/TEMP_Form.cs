@@ -12,9 +12,9 @@ using Individueel_P_S2.Logic;
 
 namespace Individueel_P_S2
 {
-    public partial class Form1 : Form
+    public partial class TEMP_Form : Form
     {
-        public Form1()
+        public TEMP_Form()
         {
             InitializeComponent();
         }
@@ -32,13 +32,13 @@ namespace Individueel_P_S2
                 for (int x = 0; x < blocks.GetLength(0); x++)
                 {
                     a += " ";
-                    if (!(DisplayHolder.hero.x_loc == x && DisplayHolder.hero.y_loc == y))
+                    if (!(DisplayHolder.hero.x == x && DisplayHolder.hero.y == y))
                     { a += blocks[x, y].ToString(); }
                     else
                     {
-                        if (!DisplayHolder.hero.Alive)
+                        if (!DisplayHolder.hero.status.Alive)
                         { a += "F"; }
-                        else if (DisplayHolder.hero.JustJumped)
+                        else if (DisplayHolder.hero.status.JustJumped)
                         { a += "#"; }
                         else
                         { a += "X"; }
@@ -62,13 +62,13 @@ namespace Individueel_P_S2
                 for (int x = part[0]; x < part[2]; x++)
                 {
                     a += " ";
-                    if (!(DisplayHolder.hero.x_loc == x && DisplayHolder.hero.y_loc == y))
+                    if (!(DisplayHolder.hero.x == x && DisplayHolder.hero.y == y))
                     { a += blocks[x, y].ToString(); }
                     else
                     {
-                        if (!DisplayHolder.hero.Alive)
+                        if (!DisplayHolder.hero.status.Alive)
                         { a += "F"; }
-                        else if (DisplayHolder.hero.JustJumped)
+                        else if (DisplayHolder.hero.status.JustJumped)
                         { a += "#"; }
                         else
                         { a += "X"; }
@@ -86,7 +86,7 @@ namespace Individueel_P_S2
             labelTimer.Text = "Time: " + time.ToString();
         }
 
-        private void buttonpressed(Inputtype type)
+        private void buttonpressed(InputType type)
         {
             MainLogic.InputRecieved(type);
             GetAllVisuals();
@@ -95,17 +95,17 @@ namespace Individueel_P_S2
         private void buttonLeft_Click(object sender, EventArgs e)
         {
             buttonLeft.BackColor = Color.Yellow;
-            buttonpressed(Inputtype.Left);
+            buttonpressed(InputType.Left);
         }
         private void buttonRight_Click(object sender, EventArgs e)
         {
             buttonRight.BackColor = Color.Yellow;
-            buttonpressed(Inputtype.Right);
+            buttonpressed(InputType.Right);
         }
         private void buttonJump_Click(object sender, EventArgs e)
         {
             buttonJump.BackColor = Color.Yellow;
-            buttonpressed(Inputtype.Jump);
+            buttonpressed(InputType.Jump);
         }
 
         private void buttonStart_Click(object sender, EventArgs e)
@@ -149,7 +149,7 @@ namespace Individueel_P_S2
             MainLogic.TimePasses();
             GetAllVisuals();
 
-            if (!DisplayHolder.hero.Alive)
+            if (!DisplayHolder.hero.status.Alive)
             {
                 buttonTimePasses.Hide();
                 buttonLeft.Hide();
@@ -182,7 +182,7 @@ namespace Individueel_P_S2
             Program.moetmaar.TIME_PASSES();
 
             // Restarts the timer
-            if (DisplayHolder.hero.Alive)
+            if (DisplayHolder.hero.status.Alive)
             { myTimer.Enabled = true; }
         }
 
@@ -192,7 +192,7 @@ namespace Individueel_P_S2
             {
                 RealTimer = false;
                 myTimer.Stop();
-                if (DisplayHolder.hero.Alive)
+                if (DisplayHolder.hero.status.Alive)
                 { buttonTimePasses.Show(); }
                 buttonRealTime.Text = "Real-time: OFF";
                 buttonRealTime.BackColor = Color.Tomato;
@@ -200,7 +200,7 @@ namespace Individueel_P_S2
             else
             {
                 RealTimer = true;
-                if (DisplayHolder.hero.Alive)
+                if (DisplayHolder.hero.status.Alive)
                 { myTimer.Enabled = true; }
                 buttonTimePasses.Hide();
                 buttonRealTime.Text = "Real-time: ON";

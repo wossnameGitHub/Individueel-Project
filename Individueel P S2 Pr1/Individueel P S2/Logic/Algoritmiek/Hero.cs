@@ -6,19 +6,20 @@ using System.Threading.Tasks;
 
 namespace Individueel_P_S2.Logic
 {
-    public class Hero
+    class Hero
     {
-        public int x_loc;
-        public int y_loc;
-        public bool HitHisHead;
-        public bool JustJumped;
-        public bool Alive;
+        public int x;
+        public int y;
+        public HeroStatus status;
 
         public Hero()
         {
-            HitHisHead = false;
-            JustJumped = false;
-            Alive = true;
+            status = new HeroStatus
+            {
+                HitHisHead = false,
+                JustJumped = false,
+                Alive = true
+            };
         }
 
         private void Move(Dim dim, int amount)
@@ -26,39 +27,39 @@ namespace Individueel_P_S2.Logic
             switch (dim)
             {
                 case Dim.X:
-                    x_loc += amount;
+                    x += amount;
                     break;
                 case Dim.Y:
-                    y_loc += amount;
+                    y += amount;
                     break;
             }
 
             if (dim == Dim.Y && amount > 0)     // dit kan niet in een keer, want als dit false is kan JustJumped nog steeds true zijn
-            { JustJumped = true; }
+            { status.JustJumped = true; }
         }
 
         public void TryMoving(Dim dim, int amount, Map map)
         {
-            if (!HitHisHead)
+            if (!status.HitHisHead)
             {
                 switch (dim)
                 {
                     case Dim.X:
-                        if (map.blocks[x_loc + amount, y_loc].type == Blocktype.WallFloor)
-                        { HitHisHead = true; }
-                        else if (map.blocks[x_loc + amount, y_loc].type == Blocktype.Death)
-                        { Alive = false; }
+                        if (map.blocks[x + amount, y].type == BlockType.WallFloor)
+                        { status.HitHisHead = true; }
+                        else if (map.blocks[x + amount, y].type == BlockType.Death)
+                        { status.Alive = false; }
                         else
                         { Move(dim, amount); }
                         break;
                     case Dim.Y:
-                        if (map.blocks[x_loc, y_loc + amount].type == Blocktype.WallFloor)
+                        if (map.blocks[x, y + amount].type == BlockType.WallFloor)
                         {
                             if (amount > 0)
-                            { HitHisHead = true; }
+                            { status.HitHisHead = true; }
                         }
-                        else if (map.blocks[x_loc, y_loc + amount].type == Blocktype.Death)
-                        { Alive = false; }
+                        else if (map.blocks[x, y + amount].type == BlockType.Death)
+                        { status.Alive = false; }
                         else
                         { Move(dim, amount); }
                         break;

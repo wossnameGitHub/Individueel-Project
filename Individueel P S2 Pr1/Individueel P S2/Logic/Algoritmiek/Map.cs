@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace Individueel_P_S2.Logic
 {
-    public class Map
+    class Map
     {
         public Block[,] blocks;
+        public MapAmbiance ambiance;
 
-        public Map(int[] mapsize, Blocktype[,] given_map)
+        public Map(int[] mapsize, BlockType[,] given_map)
         {
             blocks = new Block[mapsize[0], mapsize[1]];
 
