@@ -19,12 +19,24 @@ namespace Individueel_P_S2
             InitializeComponent();
         }
 
-        private void GetVisualTotal()
+        private void GetVisuals(bool fullmap)
         {
-            listBox1.Items.Clear();
+            ListBox listBox = new ListBox(); // wordt zometeen gelijk overschreven
+            Block[,] blocks = new Block[1, 1]; // wordt zometeen gelijk overschreven
 
-            Block[,] blocks = DisplayHolder.map.blocks;
-            
+            if (fullmap)
+            {
+                listBox = listBox1;
+                blocks = DisplayHolder.FullMap.blocks;
+            }
+            else
+            {
+                listBox = listBox2;
+                blocks = DisplayHolder.displayMap.blocks;
+            }
+
+            listBox.Items.Clear();
+
             for (int y = blocks.GetLength(1) - 1; y >= 0; y--)
             {
                 string a = "";
@@ -32,59 +44,52 @@ namespace Individueel_P_S2
                 for (int x = 0; x < blocks.GetLength(0); x++)
                 {
                     a += " ";
-                    if (!(DisplayHolder.hero.x == x && DisplayHolder.hero.y == y))
+                    if (blocks[x, y].type != BlockType.HERO)
                     { a += blocks[x, y].ToString(); }
                     else
                     {
-                        if (!DisplayHolder.hero.status.Alive)
+                        if (!DisplayHolder.heroStatus.Alive)
                         { a += "F"; }
-                        else if (DisplayHolder.hero.status.JustJumped)
+                        else if (DisplayHolder.heroStatus.JustJumped)
                         { a += "#"; }
                         else
                         { a += "X"; }
                     }
                 }
 
-                listBox1.Items.Add(a);
-            }
-        }
-        private void GetVisualLimited()
-        {
-            listBox2.Items.Clear();
-
-            Block[,] blocks = DisplayHolder.map.blocks;
-            int[] part = DisplayHolder.partofmap;
-
-            for (int y = part[3]; y >= part[1]; y--)
-            {
-                string a = "";
-
-                for (int x = part[0]; x < part[2]; x++)
-                {
-                    a += " ";
-                    if (!(DisplayHolder.hero.x == x && DisplayHolder.hero.y == y))
-                    { a += blocks[x, y].ToString(); }
-                    else
-                    {
-                        if (!DisplayHolder.hero.status.Alive)
-                        { a += "F"; }
-                        else if (DisplayHolder.hero.status.JustJumped)
-                        { a += "#"; }
-                        else
-                        { a += "X"; }
-                    }
-                }
-
-                listBox2.Items.Add(a);
+                listBox.Items.Add(a);
             }
         }
 
         private void GetAllVisuals()
         {
-            GetVisualTotal();
-            GetVisualLimited();
-            labelTimer.Text = "Time: " + time.ToString();
+            GetVisuals(true);
+            GetVisuals(false);
+            labelTimer.Text = "Time: " + DisplayHolder.timePassed.ToString();
         }
+
+        private void TIME_PASSES()
+        {
+            buttonLeft.BackColor = Color.LightGray;
+            buttonRight.BackColor = Color.LightGray;
+            buttonJump.BackColor = Color.LightGray;
+
+            MainLogic.TimePasses();
+            GetAllVisuals();
+
+            if (!DisplayHolder.heroStatus.Alive)
+            {
+                buttonTimePasses.Hide();
+                buttonLeft.Hide();
+                buttonRight.Hide();
+                buttonJump.Hide();
+
+                myTimer.Stop();
+            }
+        }
+
+        private void buttonTimePasses_Click(object sender, EventArgs e)
+        { TIME_PASSES(); }
 
         private void buttonpressed(InputType type)
         {
@@ -111,7 +116,7 @@ namespace Individueel_P_S2
         private void buttonStart_Click(object sender, EventArgs e)
         {
             MainLogic.StartGame();
-            time = 0;
+            
             GetAllVisuals();
 
             buttonLeft.Show();
@@ -138,35 +143,7 @@ namespace Individueel_P_S2
             { myTimer.Stop(); }
         }
 
-        private void TIME_PASSES()
-        {
-            buttonLeft.BackColor = Color.LightGray;
-            buttonRight.BackColor = Color.LightGray;
-            buttonJump.BackColor = Color.LightGray;
 
-            time += 1;
-
-            MainLogic.TimePasses();
-            GetAllVisuals();
-
-            if (!DisplayHolder.hero.status.Alive)
-            {
-                buttonTimePasses.Hide();
-                buttonLeft.Hide();
-                buttonRight.Hide();
-                buttonJump.Hide();
-
-                myTimer.Stop();
-            }
-        }
-
-        private void buttonTimePasses_Click(object sender, EventArgs e)
-        { TIME_PASSES(); }
-
-
-
-
-        static int time;
 
         // hieronder stuff dat te maken heeft met de real-life timer
 
@@ -179,10 +156,10 @@ namespace Individueel_P_S2
             // Stops the timer
             myTimer.Stop();
 
-            Program.moetmaar.TIME_PASSES();
+            Program.OmdatTimer.TIME_PASSES();
 
             // Restarts the timer
-            if (DisplayHolder.hero.status.Alive)
+            if (DisplayHolder.heroStatus.Alive)
             { myTimer.Enabled = true; }
         }
 
@@ -192,7 +169,7 @@ namespace Individueel_P_S2
             {
                 RealTimer = false;
                 myTimer.Stop();
-                if (DisplayHolder.hero.status.Alive)
+                if (DisplayHolder.heroStatus.Alive)
                 { buttonTimePasses.Show(); }
                 buttonRealTime.Text = "Real-time: OFF";
                 buttonRealTime.BackColor = Color.Tomato;
@@ -200,7 +177,7 @@ namespace Individueel_P_S2
             else
             {
                 RealTimer = true;
-                if (DisplayHolder.hero.status.Alive)
+                if (DisplayHolder.heroStatus.Alive)
                 { myTimer.Enabled = true; }
                 buttonTimePasses.Hide();
                 buttonRealTime.Text = "Real-time: ON";

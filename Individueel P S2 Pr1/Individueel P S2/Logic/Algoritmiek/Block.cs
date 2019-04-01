@@ -17,6 +17,16 @@ namespace Individueel_P_S2.Logic
         }
 
         /// <summary>
+        /// makes a copy of this block en returns it
+        /// </summary>
+        public Block CopyBlock()
+        {
+            Block block = new Block(type);
+            block.version = this.version;
+            return block;
+        }
+
+        /// <summary>
         /// Deze methode is tijdelijk, aangezien dit niet relevant gaat zijn als ik verder kom dan ASCII art
         /// </summary>
         public override string ToString()

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Individueel_P_S2
 {
-    public enum BlockType { EmptySpace, WallFloor, Death, SpawnHero, HERO }
+    public enum BlockType { EmptySpace, WallFloor, Death, SpawnHero, PENDING, HERO }
 
     public enum BlockVersion { }
 

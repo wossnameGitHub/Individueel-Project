@@ -8,7 +8,7 @@ namespace Individueel_P_S2
 {
     static class TEMP_Instellingen
     {
-        public static int[] mapsize = new int[2] { 35, 15 };
+        private static int[] mapsize = new int[2] { 35, 15 };
 
         public static BlockType[,] given_map = GivenMap(mapsize[0], mapsize[1]);
 

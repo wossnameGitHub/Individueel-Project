@@ -11,13 +11,16 @@ namespace Individueel_P_S2.Logic
         public Block[,] blocks;
         public MapAmbiance ambiance;
 
-        public Map(int[] mapsize, BlockType[,] given_map)
+        public Map(BlockType[,] given_map)
         {
-            blocks = new Block[mapsize[0], mapsize[1]];
+            int size_x = given_map.GetLength(0);
+            int size_y = given_map.GetLength(1);
 
-            for (int x = 0; x < blocks.GetLength(0); x++)
+            blocks = new Block[size_x, size_y];
+
+            for (int x = 0; x < size_x; x++)
             {
-                for (int y = 0; y < blocks.GetLength(1); y++)
+                for (int y = 0; y < size_y; y++)
                 {
                     blocks[x, y] = new Block(given_map[x, y]);
                 }

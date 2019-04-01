@@ -8,7 +8,7 @@ namespace Individueel_P_S2
 {
     static class Program
     {
-        public static TEMP_Form moetmaar;
+        public static TEMP_Form OmdatTimer;
 
         /// <summary>
         /// The main entry point for the application.
@@ -19,8 +19,8 @@ namespace Individueel_P_S2
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            moetmaar = new TEMP_Form();
-            Application.Run(moetmaar);
+            OmdatTimer = new TEMP_Form();
+            Application.Run(OmdatTimer);
         }
     }
 }
