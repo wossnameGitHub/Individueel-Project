@@ -8,7 +8,7 @@ namespace Individueel_P_S2.Logic
 {
     static class MainLogic
     {
-        public static Game currentGame;
+        private static Game currentGame;
         private static List<InputType> inputs = new List<InputType>();
 
         private static void UpdateDisplayHolder()

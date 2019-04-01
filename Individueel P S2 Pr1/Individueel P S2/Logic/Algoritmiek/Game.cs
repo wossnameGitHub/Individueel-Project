@@ -11,15 +11,15 @@ namespace Individueel_P_S2.Logic
         private Map map;
         private Hero hero;
         public int timePassed { get; private set; }
-        //private ??? timeStarted;
-        public List<bool[]> movesSaved { get; private set; }
+        private DateTime timeStarted;
+        private List<bool[]> movesSaved;
 
         public Game(Map map)
         {
             this.map = map;
             hero = new Hero();
             timePassed = 0;
-            //timeStarted = the_time_right_now
+            timeStarted = DateTime.Now;
             movesSaved = new List<bool[]>();
 
             // determine the starting location for the Hero
@@ -41,7 +41,7 @@ namespace Individueel_P_S2.Logic
         {
             if (!hero.status.JustJumped)
             {
-                hero.TryMoving(Dim.Y, -1, map);
+                hero.TryMoving(Dim.Y, -1, map.blocks);
             }
         }
 
@@ -60,20 +60,19 @@ namespace Individueel_P_S2.Logic
 
             if (inputs.Contains(InputType.Jump) && validjump)
             {
-                hero.TryMoving(Dim.Y, 1, map);
-                hero.TryMoving(Dim.Y, 1, map);
+                hero.TryMoving(Dim.Y, 1, map.blocks);
+                hero.TryMoving(Dim.Y, 1, map.blocks);
                 movesSaved[timePassed][(int)InputType.Jump] = true; // hoe ik het nu doe slaat hij sprongen die niet geldig waren ook niet op
             }
 
             if (inputs.Contains(InputType.Left)) 
             {
-                hero.TryMoving(Dim.X, -1, map);
-                movesSaved[timePassed][(int)InputType.Left] = true; // datzelfde geldt ook voor als je links en rrecht tegelijkertijd indrukt (geen van beide wordt opgeslagen)
+                hero.TryMoving(Dim.X, -1, map.blocks);
+                movesSaved[timePassed][(int)InputType.Left] = true; // datzelfde geldt ook voor als je links en rechts tegelijkertijd indrukt (geen van beide wordt opgeslagen)
             }
-
-            if (inputs.Contains(InputType.Right))
+            else if (inputs.Contains(InputType.Right))
             {
-                hero.TryMoving(Dim.X, 1, map);
+                hero.TryMoving(Dim.X, 1, map.blocks);
                 movesSaved[timePassed][(int)InputType.Right] = true; // zie hierboven
             }
 
@@ -136,6 +135,11 @@ namespace Individueel_P_S2.Logic
             return D_map;
         }
 
+        public HeroStatus GetHeroStatus()
+        {
+            return hero.status;
+        }
+
         public Map TEMP_CreateFullMap()
         {
             int x_total = map.blocks.GetLength(0);
@@ -164,11 +168,6 @@ namespace Individueel_P_S2.Logic
             }
 
             return D_map;
-        }
-
-        public HeroStatus GetHeroStatus()
-        {
-            return hero.status;
         }
     }
 }

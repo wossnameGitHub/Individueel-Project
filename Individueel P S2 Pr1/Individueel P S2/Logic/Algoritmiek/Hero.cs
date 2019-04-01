@@ -38,27 +38,27 @@ namespace Individueel_P_S2.Logic
             { status.JustJumped = true; }
         }
 
-        public void TryMoving(Dim dim, int amount, Map map)
+        public void TryMoving(Dim dim, int amount, Block[,] blocks) // blocks hier meegeven is niet echt cool
         {
             if (!status.HitHisHead)
             {
                 switch (dim)
                 {
                     case Dim.X:
-                        if (map.blocks[x + amount, y].type == BlockType.WallFloor)
+                        if (blocks[x + amount, y].type == BlockType.WallFloor)
                         { status.HitHisHead = true; }
-                        else if (map.blocks[x + amount, y].type == BlockType.Death)
+                        else if (blocks[x + amount, y].type == BlockType.Death)
                         { status.Alive = false; }
                         else
                         { Move(dim, amount); }
                         break;
                     case Dim.Y:
-                        if (map.blocks[x, y + amount].type == BlockType.WallFloor)
+                        if (blocks[x, y + amount].type == BlockType.WallFloor)
                         {
                             if (amount > 0)
                             { status.HitHisHead = true; }
                         }
-                        else if (map.blocks[x, y + amount].type == BlockType.Death)
+                        else if (blocks[x, y + amount].type == BlockType.Death)
                         { status.Alive = false; }
                         else
                         { Move(dim, amount); }
